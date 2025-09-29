@@ -34,11 +34,15 @@ jobs:
         run: npm run lint
 
       - name: Build Next.js app
-        run: npm run build
+        run: |
+          echo "--- DEBUG ---"
+          echo "Value of NEXT_PUBLIC_SANITY_API_VERSION is: $NEXT_PUBLIC_SANITY_API_VERSION"
+          echo "--- END DEBUG ---"
+          npm run build
         env:
           NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
           NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
-          NEXT_PUBLIC_SANITY_API_VERSION: '2025-09-29' 
+          NEXT_PUBLIC_SANITY_API_VERSION: '2025-09-29'
 
       - name: Run tests (Next.js app)
         run: npx jest
