@@ -128,7 +128,7 @@ const Contact = () => {
   return (
     // La balise <section> pour la section de contact.
     // - `id="contact"`: Ancre pour la navigation.
-    <section id="contact" className="py-20 px-6 bg-gray-100 text-center">
+    <section id="contact" className="py-20 px-6 bg-gray-100 text-center text-black">
       <h2 className="text-4xl font-bold mb-10 text-primary">Contactez-nous</h2>
       <p className="max-w-2xl mx-auto mb-8 text-lg">
         Une question, une demande spéciale ou simplement envie de nous dire bonjour ?
