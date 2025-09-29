@@ -34,18 +34,11 @@ jobs:
         run: npm run lint
 
       - name: Build Next.js app
-        run: |
-          echo "--- DEBUG ---"
-          echo "Value of NEXT_PUBLIC_SANITY_API_VERSION from env is: $NEXT_PUBLIC_SANITY_API_VERSION"
-          echo "--- All env vars ---"
-          printenv
-          echo "--- END All env vars ---"
-          echo "--- END DEBUG ---"
-          npm run build
+        run: npm run build
         env:
           NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
           NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
-          NEXT_PUBLIC_SANITY_API_VERSION: '2025-09-29'
+          NEXT_PUBLIC_SANITY_API_VERSION: ${{ secrets.NEXT_PUBLIC_SANITY_API_VERSION }}
 
       - name: Run tests (Next.js app)
         run: npx jest
@@ -71,4 +64,4 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
           NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
           NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
-          NEXT_PUBLIC_SANITY_API_VERSION: '2025-09-29'
+          NEXT_PUBLIC_SANITY_API_VERSION: ${{ secrets.NEXT_PUBLIC_SANITY_API_VERSION }}
