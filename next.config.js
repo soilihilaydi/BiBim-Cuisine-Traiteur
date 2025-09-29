@@ -2,6 +2,9 @@ const { withSentryConfig } = require('@sentry/nextjs');
 
 const nextConfig = {
   /* config options here */
+  images: {
+    domains: ['cdn.sanity.io'],
+  },
 };
 
 const sentryWebpackPluginOptions = {
