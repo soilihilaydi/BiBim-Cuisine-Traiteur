@@ -28,7 +28,7 @@ const Concept = () => {
       {/* - `max-w-2xl`: Limite la largeur maximale du paragraphe pour une meilleure lisibilité. */}
       {/* - `mx-auto`: Centre le paragraphe horizontalement en lui donnant des marges automatiques. */}
       {/* - `text-lg`: Définit la taille du texte. */}
-      <p className="max-w-2xl mx-auto text-lg">
+      <p className="max-w-2xl mx-auto text-lg text-red-500">
         Sur le marché de Lamastre les mardis / réalisation de repas pour groupes, buffets froids/chauds/apéro.
         {/* La balise <br/> force un retour à la ligne. */}
         <br/>
