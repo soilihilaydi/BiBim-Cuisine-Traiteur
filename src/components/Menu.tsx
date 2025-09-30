@@ -180,68 +180,78 @@ const Menu = ({ initialMenuItems }: MenuProps) => {
   return (
     // La balise <section> pour la section du menu.
     // - `id="menu"`: Ancre pour la navigation.
-    <section id="menu" className="py-20 px-6 text-center">
-      <h2 className="text-4xl font-bold mb-10 text-primary">Notre Menu</h2>
-      {/* Grille Tailwind CSS pour afficher les éléments du menu. */}
-      {/* - `grid md:grid-cols-3`: Affiche les éléments en colonne unique sur mobile, 3 colonnes sur écrans moyens et plus. */}
-      {/* - `gap-8`: Espacement entre les éléments de la grille. */}
-      {/* - `max-w-5xl mx-auto`: Limite la largeur de la grille et la centre. */}
-      <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-        {/* `menuItems.map()`: Itère sur chaque élément du tableau `menuItems` pour créer un composant pour chacun. */}
-        {menuItems.map((item, index) => (
-          // Chaque élément de la liste doit avoir une prop `key` unique pour que React puisse les identifier efficacement.
-          <div key={item._id} className="bg-white shadow-lg p-6 rounded-2xl flex flex-col items-center">
-            {/* --- Données structurées JSON-LD pour le SEO --- */}
-            {/* Ce script fournit des informations structurées sur chaque élément de menu aux moteurs de recherche. */}
-            {/* Cela peut aider à améliorer la visibilité dans les résultats de recherche (ex: affichage direct du menu). */}
-            <script type="application/ld+json">
-              {JSON.stringify({
-                "@context": "http://schema.org", // Contexte du schéma (schema.org est un vocabulaire standard).
-                "@type": "MenuItem",             // Type d'entité : un élément de menu.
-                name: item.name,
-                description: item.description,
-                image: item.image?.asset?.url,
-                offers: {
-                  "@type": "Offer",
-                  price: item.price,
-                  priceCurrency: "EUR"
-                },
-                hasMenuSection: {
-                  "@type": "MenuSection",
-                  name: item.categoryName || 'Menu'
-                }
-              })}
-            </script>
+    <section
+      id="menu"
+      className="relative py-20 px-6 text-center bg-cover bg-no-repeat bg-center bg-fixed"
+      style={{ backgroundImage: 'url(/images/hero.jpg)' }}
+    >
+      {/* Overlay for text readability */}
+      <div className="absolute inset-0 bg-black opacity-60"></div>
 
-            {/* Affiche l'image de l'élément de menu si elle existe. */}
-            {item.image && (
-              <Image
-                src={item.image.asset.url} // Source de l'image.
-                alt={item.name}             // Texte alternatif pour l'accessibilité.
-                width={200}                 // Largeur intrinsèque de l'image.
-                height={200}                // Hauteur intrinsèque de l'image.
-                className="rounded-lg mb-4 object-cover" // Styles Tailwind pour l'image.
-                // `sizes` aide Next.js à choisir la meilleure taille d'image en fonction de la largeur de l'écran.
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 200px"
-                // `priority` indique à Next.js de charger cette image avec une priorité élevée (pour les images visibles au-dessus du pli).
-                // Ici, seule la première image (index 0) est chargée avec priorité.
-                priority={index === 0}
-              />
-            )}
-            {/* Nom de l'élément de menu. */}
-            <h3 className="text-2xl font-bold text-primary mb-2">{item.name}</h3>
-            {/* Nom de la catégorie, affiché seulement s'il existe. */}
-            {item.categoryName && <p className="text-gray-600 text-sm mb-1">{item.categoryName}</p>}
-            {/* Description de l'élément, affichée seulement s'il existe. */}
-            {item.description && <p className="mb-2">{item.description}</p>}
-            {/* Prix de l'élément. */}
-            <span className="font-bold text-secondary text-xl">{item.price}€</span>
-          </div>
-        ))}
-        {/* Message affiché si aucun élément de menu n'est disponible après le chargement et sans erreur. */}
-        {menuItems.length === 0 && !loading && !error && (
-          <p className="col-span-full">Aucun élément de menu disponible pour le moment.</p>
-        )}
+      {/* Contenu principal de la section Menu, positionné au-dessus du calque. */}
+      <div className="relative z-10">
+        <h2 className="text-4xl font-bold text-center mb-10 text-white">Notre Menu</h2>
+        {/* Grille Tailwind CSS pour afficher les éléments du menu. */}
+        {/* - `grid md:grid-cols-3`: Affiche les éléments en colonne unique sur mobile, 3 colonnes sur écrans moyens et plus. */}
+        {/* - `gap-8`: Espacement entre les éléments de la grille. */}
+        {/* - `max-w-5xl mx-auto`: Limite la largeur de la grille et la centre. */}
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {/* `menuItems.map()`: Itère sur chaque élément du tableau `menuItems` pour créer un composant pour chacun. */}
+          {menuItems.map((item, index) => (
+            // Chaque élément de la liste doit avoir une prop `key` unique pour que React puisse les identifier efficacement.
+            <div key={item._id} className="bg-white/10 shadow-lg p-6 rounded-2xl flex flex-col items-center">
+              {/* --- Données structurées JSON-LD pour le SEO --- */}
+              {/* Ce script fournit des informations structurées sur chaque élément de menu aux moteurs de recherche. */}
+              {/* Cela peut aider à améliorer la visibilité dans les résultats de recherche (ex: affichage direct du menu). */}
+              <script type="application/ld+json">
+                {JSON.stringify({
+                  "@context": "http://schema.org", // Contexte du schéma (schema.org est un vocabulaire standard).
+                  "@type": "MenuItem",             // Type d'entité : un élément de menu.
+                  name: item.name,
+                  description: item.description,
+                  image: item.image?.asset?.url,
+                  offers: {
+                    "@type": "Offer",
+                    price: item.price,
+                    priceCurrency: "EUR"
+                  },
+                  hasMenuSection: {
+                    "@type": "MenuSection",
+                    name: item.categoryName || 'Menu'
+                  }
+                })}
+              </script>
+
+              {/* Affiche l'image de l'élément de menu si elle existe. */}
+              {item.image && (
+                <Image
+                  src={item.image.asset.url} // Source de l'image.
+                  alt={item.name}             // Texte alternatif pour l'accessibilité.
+                  width={200}                 // Largeur intrinsèque de l'image.
+                  height={200}                // Hauteur intrinsèque de l'image.
+                  className="rounded-lg mb-4 object-cover" // Styles Tailwind pour l'image.
+                  // `sizes` aide Next.js à choisir la meilleure taille d'image en fonction de la largeur de l'écran.
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 200px"
+                  // `priority` indique à Next.js de charger cette image avec une priorité élevée (pour les images visibles au-dessus du pli).
+                  // Ici, seule la première image (index 0) est chargée avec priorité.
+                  priority={index === 0}
+                />
+              )}
+              {/* Nom de l'élément de menu. */}
+              <h3 className="text-2xl font-bold text-white mb-2">{item.name}</h3>
+              {/* Nom de la catégorie, affiché seulement s'il existe. */}
+              {item.categoryName && <p className="text-gray-200 text-sm mb-1">{item.categoryName}</p>}
+              {/* Description de l'élément, affichée seulement s'il existe. */}
+              {item.description && <p className="mb-2 text-gray-200">{item.description}</p>}
+              {/* Prix de l'élément. */}
+              <span className="font-bold text-white text-xl">{item.price}€</span>
+            </div>
+          ))}
+          {/* Message affiché si aucun élément de menu n'est disponible après le chargement et sans erreur. */}
+          {menuItems.length === 0 && !loading && !error && (
+            <p className="col-span-full text-white">Aucun élément de menu disponible pour le moment.</p>
+          )}
+        </div>
       </div>
     </section>
   );

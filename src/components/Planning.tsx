@@ -24,6 +24,8 @@ import { useEffect, useState, useCallback } from 'react';
 import { sanityClient } from '../../lib/sanityClient';
 // Importe `dynamic` de Next.js pour l'importation dynamique de composants.
 import dynamic from 'next/dynamic';
+// Importe le composant Image de Next.js, qui optimise automatiquement les images pour le web.
+import Image from 'next/image';
 // Importe le type `LatLngExpression` de la bibliothèque Leaflet, utilisé pour les coordonnées géographiques.
 import { LatLngExpression } from 'leaflet';
 
@@ -147,19 +149,29 @@ const Planning = ({ initialPlanningItems }: PlanningProps) => {
   // Si `loading` est vrai, affiche un squelette de chargement pour la liste et la carte.
   if (loading) {
     return (
-      <section id="planning" className="py-20 px-6 text-center">
-        <h2 className="text-4xl font-bold mb-10 text-primary">Où nous trouver</h2>
-        <p className="mb-6">Retrouvez notre foodtruck selon le planning ci-dessous :</p>
-        <ul className="max-w-xl mx-auto mb-8 text-lg space-y-2 animate-pulse">
-          {/* Crée 3 éléments de "squelette" pour simuler le chargement de la liste. */}
-          {[...Array(3)].map((_, index) => (
-            <li key={index} className="h-6 bg-gray-300 rounded w-full"></li>
-          ))}
-        </ul>
-        <div className="rounded-2xl shadow-lg overflow-hidden">
-          {/* Placeholder pour la carte pendant le chargement. */}
-          <div style={{ height: '400px', width: '100%' }} className="bg-gray-200 flex items-center justify-center">
-            <p>Chargement de la carte...</p>
+      <section
+        id="planning"
+        className="relative py-20 px-6 bg-cover bg-no-repeat bg-center bg-fixed text-center"
+        style={{ backgroundImage: 'url(/images/hero.jpg)' }}
+      >
+        {/* Overlay for text readability */}
+        <div className="absolute inset-0 bg-black opacity-60"></div>
+
+        {/* Contenu principal de la section Planning, positionné au-dessus du calque. */}
+        <div className="relative z-10">
+          <h2 className="text-4xl font-bold mb-10 text-white">Où nous trouver</h2>
+          <p className="mb-6 text-white">Retrouvez notre foodtruck selon le planning ci-dessous :</p>
+          <ul className="max-w-xl mx-auto mb-8 text-lg space-y-2 animate-pulse">
+            {/* Crée 3 éléments de "squelette" pour simuler le chargement de la liste. */}
+            {[...Array(3)].map((_, index) => (
+              <li key={index} className="h-6 bg-white/20 rounded w-full"></li>
+            ))}
+          </ul>
+          <div className="rounded-2xl shadow-lg overflow-hidden">
+            {/* Placeholder pour la carte pendant le chargement. */}
+            <div style={{ height: '400px', width: '100%' }} className="bg-white/10 flex items-center justify-center">
+              <p className="text-white">Chargement de la carte...</p>
+            </div>
           </div>
         </div>
       </section>
@@ -169,15 +181,25 @@ const Planning = ({ initialPlanningItems }: PlanningProps) => {
   // Si `error` contient un message, affiche le message d'erreur et un bouton de réessai.
   if (error) {
     return (
-      <section id="planning" className="py-20 px-6 text-center">
-        <h2 className="text-4xl font-bold mb-10 text-primary">Où nous trouver</h2>
-        <p className="text-red-500 mb-4">{error}</p>
-        <button
-          onClick={fetchPlanningItems} // Au clic, tente de récupérer à nouveau les données.
-          className="bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-accent transition"
-        >
-          Réessayer
-        </button>
+      <section
+        id="planning"
+        className="relative py-20 px-6 bg-cover bg-no-repeat bg-center bg-fixed text-center"
+        style={{ backgroundImage: 'url(/images/hero.jpg)' }}
+      >
+        {/* Overlay for text readability */}
+        <div className="absolute inset-0 bg-black opacity-60"></div>
+
+        {/* Contenu principal de la section Planning, positionné au-dessus du calque. */}
+        <div className="relative z-10">
+          <h2 className="text-4xl font-bold mb-10 text-white">Où nous trouver</h2>
+          <p className="text-white mb-4">{error}</p>
+          <button
+            onClick={fetchPlanningItems} // Au clic, tente de récupérer à nouveau les données.
+            className="bg-white/20 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/30 transition"
+          >
+            Réessayer
+          </button>
+        </div>
       </section>
     );
   }
@@ -247,22 +269,31 @@ const Planning = ({ initialPlanningItems }: PlanningProps) => {
   return (
     // La balise <section> pour la section du planning.
     // - `id="planning"`: Ancre pour la navigation.
-    <section id="planning" className="py-20 px-6 text-center">
+    <section
+      id="planning"
+      className="relative py-20 px-6 bg-cover bg-no-repeat bg-center bg-fixed text-center"
+      style={{ backgroundImage: 'url(/images/hero.jpg)' }}
+    >
+      {/* Overlay for text readability */}
+      <div className="absolute inset-0 bg-black opacity-60"></div>
+
       {/* Affiche le script JSON-LD généré pour le SEO. */}
       {/* {generateEventSchema()} */}
-      <h2 className="text-4xl font-bold mb-10 text-primary">Où nous trouver</h2>
-      <p className="mb-6">Retrouvez notre foodtruck selon le planning ci-dessous :</p>
-      <ul className="max-w-xl mx-auto mb-8 text-lg">
-        {/* `planningItems.map()`: Itère sur chaque événement pour l'afficher dans une liste. */}
-        {planningItems.map((item) => (
-          <li key={item._id}>
-            {item.day} – {item.place} ({item.time})
-          </li>
-        ))}
-      </ul>
-      <div className="rounded-2xl shadow-lg overflow-hidden">
-        {/* Affiche le composant Map, en lui passant la position calculée et le texte du popup. */}
-        <Map position={position} popupText={popupText} />
+      <div className="relative z-10">
+        <h2 className="text-4xl font-bold mb-10 text-white">Où nous trouver</h2>
+        <p className="mb-6 text-white">Retrouvez notre foodtruck selon le planning ci-dessous :</p>
+        <ul className="max-w-xl mx-auto mb-8 text-lg text-white">
+          {/* `planningItems.map()`: Itère sur chaque événement pour l'afficher dans une liste. */}
+          {planningItems.map((item) => (
+            <li key={item._id}>
+              {item.day} – {item.place} ({item.time})
+            </li>
+          ))}
+        </ul>
+        <div className="rounded-2xl shadow-lg overflow-hidden">
+          {/* Affiche le composant Map, en lui passant la position calculée et le texte du popup. */}
+          <Map position={position} popupText={popupText} />
+        </div>
       </div>
     </section>
   );

@@ -15,30 +15,35 @@ import Image from 'next/image';
 // Définition du composant fonctionnel Concept.
 const Concept = () => {
   return (
-    // La balise <section> est utilisée pour regrouper un contenu thématiquement lié.
-    // - `id="concept"`: Permet de créer une ancre pour la navigation interne (ex: #concept dans l'URL).
-    // - `py-20 px-6`: Ajoute un padding vertical (haut/bas) de 80px et horizontal (gauche/droite) de 24px.
-    // - `text-center`: Centre le texte à l'intérieur de la section.
-    // - `bg-accent`: Définit la couleur de fond de la section en utilisant la couleur 'accent' définie dans Tailwind.
-    <section id="concept" className="py-20 px-6 flex flex-col lg:flex-row items-center justify-center bg-accent/50">
-      {/* Left Image */}
-      <div className="hidden lg:block w-1/4">
-        <Image src="/foodtruck.png" alt="Food Truck" width={200} height={200} className="mx-auto" />
-      </div>
+    <section
+      id="concept"
+      className="relative py-20 px-6 flex flex-col lg:flex-row items-center justify-center bg-cover bg-no-repeat bg-center bg-fixed"
+      style={{ backgroundImage: 'url(/images/hero.jpg)' }}
+    >
+      {/* Overlay for text readability */}
+      <div className="absolute inset-0 bg-black opacity-60"></div> {/* Adjust color and opacity as needed */}
 
-      {/* Text Content */}
-      <div className="text-center lg:w-1/2">
-        <h2 className="text-4xl font-bold mb-6 text-white">Notre Concept</h2>
-        <p className="max-w-2xl mx-auto text-lg text-white">
-          Sur le marché de Lamastre les mardis / réalisation de repas pour groupes, buffets froids/chauds/apéro.
-          <br/>
-          Une restauration nomade qui se déplace pour venir à vous : convivialité, authenticité et gourmandise. 🌮🍲
-        </p>
-      </div>
+      {/* Contenu principal de la section Concept, positionné au-dessus du calque. */}
+      <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center w-full">
+        {/* Left Image */}
+        <div className="hidden lg:block w-1/4">
+          <Image src="/foodtruck.png" alt="Food Truck" width={200} height={200} className="mx-auto" />
+        </div>
 
-      {/* Right Image */}
-      <div className="hidden lg:block w-1/4">
-        <Image src="/foodtruck.png" alt="Food Truck" width={200} height={200} className="mx-auto" />
+        {/* Text Content */}
+        <div className="text-center lg:w-1/2">
+          <h2 className="text-4xl font-bold mb-6 text-white">Notre Concept</h2>
+          <p className="max-w-2xl mx-auto text-lg text-white">
+            Sur le marché de Lamastre les mardis / réalisation de repas pour groupes, buffets froids/chauds/apéro.
+            <br/>
+            Une restauration nomade qui se déplace pour venir à vous : convivialité, authenticité et gourmandise. 🌮🍲
+          </p>
+        </div>
+
+        {/* Right Image */}
+        <div className="hidden lg:block w-1/4">
+          <Image src="/foodtruck.png" alt="Food Truck" width={200} height={200} className="mx-auto" />
+        </div>
       </div>
     </section>
   );

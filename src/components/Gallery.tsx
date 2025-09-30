@@ -120,15 +120,25 @@ const Gallery = ({ initialGalleryItems }: GalleryProps) => {
   // Si `loading` est vrai, affiche un squelette de chargement pour les images.
   if (loading) {
     return (
-      <section id="gallery" className="py-20 px-6 bg-accent text-center">
-        <h2 className="text-4xl font-bold mb-10 text-primary">Galerie</h2>
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {/* Crée 3 éléments de "squelette" pour simuler le chargement des images. */}
-          {[...Array(3)].map((_, index) => (
-            <div key={index} className="relative w-full h-64 rounded-2xl shadow-lg overflow-hidden animate-pulse">
-              <div className="w-full h-full bg-gray-300"></div>
-            </div>
-          ))}
+      <section
+        id="gallery"
+        className="relative py-20 px-6 bg-cover bg-no-repeat bg-center bg-fixed text-center"
+        style={{ backgroundImage: 'url(/images/hero.jpg)' }}
+      >
+        {/* Overlay for text readability */}
+        <div className="absolute inset-0 bg-black opacity-60"></div>
+
+        {/* Contenu principal de la section Gallery, positionné au-dessus du calque. */}
+        <div className="relative z-10">
+          <h2 className="text-4xl font-bold mb-10 text-white">Galerie</h2>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {/* Crée 3 éléments de "squelette" pour simuler le chargement des images. */}
+            {[...Array(3)].map((_, index) => (
+              <div key={index} className="relative w-full h-64 rounded-2xl shadow-lg overflow-hidden animate-pulse">
+                <div className="w-full h-full bg-gray-300"></div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     );
@@ -137,15 +147,25 @@ const Gallery = ({ initialGalleryItems }: GalleryProps) => {
   // Si `error` contient un message, affiche le message d'erreur et un bouton de réessai.
   if (error) {
     return (
-      <section id="gallery" className="py-20 px-6 bg-accent text-center">
-        <h2 className="text-4xl font-bold mb-10 text-primary">Galerie</h2>
-        <p className="text-red-500 mb-4">{error}</p>
-        <button
-          onClick={fetchGalleryItems} // Au clic, tente de récupérer à nouveau les données.
-          className="bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-accent transition"
-        >
-          Réessayer
-        </button>
+      <section
+        id="gallery"
+        className="relative py-20 px-6 bg-cover bg-no-repeat bg-center bg-fixed text-center"
+        style={{ backgroundImage: 'url(/images/hero.jpg)' }}
+      >
+        {/* Overlay for text readability */}
+        <div className="absolute inset-0 bg-black opacity-60"></div>
+
+        {/* Contenu principal de la section Gallery, positionné au-dessus du calque. */}
+        <div className="relative z-10">
+          <h2 className="text-4xl font-bold mb-10 text-white">Galerie</h2>
+          <p className="text-white mb-4">{error}</p>
+          <button
+            onClick={fetchGalleryItems} // Au clic, tente de récupérer à nouveau les données.
+            className="bg-white/20 text-white px-6 py-3 rounded-full font-semibold hover:bg-white/30 transition"
+          >
+            Réessayer
+          </button>
+        </div>
       </section>
     );
   }
@@ -154,40 +174,50 @@ const Gallery = ({ initialGalleryItems }: GalleryProps) => {
   return (
     // La balise <section> pour la section de la galerie.
     // - `id="gallery"`: Ancre pour la navigation.
-    <section id="gallery" className="py-20 px-6 bg-accent text-center">
-      <h2 className="text-4xl font-bold mb-10 text-primary">Galerie</h2>
-      {/* Grille Tailwind CSS pour afficher les images. */}
-      {/* - `grid md:grid-cols-3`: Affiche les images en colonne unique sur mobile, 3 colonnes sur écrans moyens et plus. */}
-      {/* - `gap-6`: Espacement entre les éléments de la grille. */}
-      {/* - `max-w-5xl mx-auto`: Limite la largeur de la grille et la centre. */}
-      <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-        {/* `galleryItems.map()`: Itère sur chaque élément de la galerie pour créer un composant pour chacun. */}
-        {galleryItems.map((item) => (
-          // Conteneur pour chaque image de la galerie.
-          <div key={item._id} className="relative w-full h-64 rounded-2xl shadow-lg overflow-hidden">
-            {/* Affiche l'image de l'élément si elle existe. */}
-            {item.image && (
-              <Image
-                src={item.image.asset.url} // Source de l'image.
-                alt={item.caption || 'Gallery image'} // Texte alternatif pour l'accessibilité.
-                fill // La prop `fill` fait en sorte que l'image remplisse le conteneur parent.
-                style={{ objectFit: 'cover' }} // S'assure que l'image couvre la zone sans être déformée.
-                // `sizes` aide Next.js à choisir la meilleure taille d'image en fonction de la largeur de l'écran.
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
-            )}
-            {/* Affiche la légende de l'image si elle existe, en superposition. */}
-            {item.caption && (
-              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-sm">
-                {item.caption}
-              </div>
-            )}
-          </div>
-        ))}
-        {/* Message affiché si aucun élément de galerie n'est disponible après le chargement et sans erreur. */}
-        {galleryItems.length === 0 && !loading && !error && (
-          <p className="col-span-full">Aucun élément de galerie disponible pour le moment.</p>
-        )}
+    <section
+      id="gallery"
+      className="relative py-20 px-6 bg-cover bg-no-repeat bg-center bg-fixed text-center"
+      style={{ backgroundImage: 'url(/images/hero.jpg)' }}
+    >
+      {/* Overlay for text readability */}
+      <div className="absolute inset-0 bg-black opacity-60"></div>
+
+      {/* Contenu principal de la section Gallery, positionné au-dessus du calque. */}
+      <div className="relative z-10">
+        <h2 className="text-4xl font-bold mb-10 text-white">Galerie</h2>
+        {/* Grille Tailwind CSS pour afficher les images. */}
+        {/* - `grid md:grid-cols-3`: Affiche les images en colonne unique sur mobile, 3 colonnes sur écrans moyens et plus. */}
+        {/* - `gap-6`: Espacement entre les éléments de la grille. */}
+        {/* - `max-w-5xl mx-auto`: Limite la largeur de la grille et la centre. */}
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {/* `galleryItems.map()`: Itère sur chaque élément de la galerie pour créer un composant pour chacun. */}
+          {galleryItems.map((item) => (
+            // Conteneur pour chaque image de la galerie.
+            <div key={item._id} className="relative w-full h-64 rounded-2xl shadow-lg overflow-hidden">
+              {/* Affiche l'image de l'élément si elle existe. */}
+              {item.image && (
+                <Image
+                  src={item.image.asset.url} // Source de l'image.
+                  alt={item.caption || 'Gallery image'} // Texte alternatif pour l'accessibilité.
+                  fill // La prop `fill` fait en sorte que l'image remplisse le conteneur parent.
+                  style={{ objectFit: 'cover' }} // S'assure que l'image couvre la zone sans être déformée.
+                  // `sizes` aide Next.js à choisir la meilleure taille d'image en fonction de la largeur de l'écran.
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              )}
+              {/* Affiche la légende de l'image si elle existe, en superposition. */}
+              {item.caption && (
+                <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-2 text-sm">
+                  {item.caption}
+                </div>
+              )}
+            </div>
+          ))}
+          {/* Message affiché si aucun élément de galerie n'est disponible après le chargement et sans erreur. */}
+          {galleryItems.length === 0 && !loading && !error && (
+            <p className="col-span-full text-white">Aucun élément de galerie disponible pour le moment.</p>
+          )}
+        </div>
       </div>
     </section>
   );

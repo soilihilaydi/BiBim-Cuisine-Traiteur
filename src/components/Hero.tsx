@@ -31,7 +31,7 @@ const Hero = () => {
       {/* Calque de superposition (overlay) pour améliorer la lisibilité du texte sur l'image de fond. */}
       {/* - `absolute inset-0`: Positionne le div absolument pour couvrir toute la section. */}
       {/* - `bg-primary opacity-70`: Définit la couleur de fond avec une opacité de 70%. */}
-      <div className="absolute inset-0 bg-primary opacity-70"></div> {/* Overlay for text readability */}
+      <div className="absolute inset-0 bg-black opacity-60"></div> {/* Overlay for text readability */}
 
       {/* Contenu principal de la section Hero, positionné au-dessus du calque. */}
       {/* - `relative z-10`: Positionne le contenu relativement et lui donne un z-index plus élevé */}

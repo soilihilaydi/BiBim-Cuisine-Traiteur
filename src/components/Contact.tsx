@@ -17,6 +17,7 @@
 
 // Importe le hook `useState` de React pour gérer l'état local du composant.
 import { useState } from 'react';
+import Image from 'next/image';
 
 /**
  * @interface FormData
@@ -128,81 +129,91 @@ const Contact = () => {
   return (
     // La balise <section> pour la section de contact.
     // - `id="contact"`: Ancre pour la navigation.
-    <section id="contact" className="py-20 px-6 bg-gray-100 text-center text-black">
-      <h2 className="text-4xl font-bold mb-10 text-primary">Contactez-nous</h2>
-      <p className="max-w-2xl mx-auto mb-8 text-lg">
-        Une question, une demande spéciale ou simplement envie de nous dire bonjour ?
-        Utilisez le formulaire ci-dessous, nous vous répondrons dans les plus brefs délais !
-      </p>
+    <section
+      id="contact"
+      className="relative py-20 px-6 bg-cover bg-no-repeat bg-center bg-fixed text-center text-white"
+      style={{ backgroundImage: 'url(/images/hero.jpg)' }}
+    >
+      {/* Overlay for text readability */}
+      <div className="absolute inset-0 bg-black opacity-60"></div>
 
-      {/* Le formulaire de contact. */}
-      {/* - `aria-label`: Attribut d'accessibilité pour décrire le formulaire aux lecteurs d'écran. */}
-      {/* - `onSubmit`: Appelle la fonction `handleSubmit` lorsque le formulaire est soumis. */}
-      <form onSubmit={handleSubmit} className="max-w-xl mx-auto bg-white p-8 rounded-2xl shadow-lg" aria-label="Formulaire de contact">
-        {/* Champ pour le nom. */}
-        <div className="mb-4 text-left">
-          <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
-            Nom:
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required // Rend le champ obligatoire.
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
+      {/* Contenu principal de la section Contact, positionné au-dessus du calque. */}
+      <div className="relative z-10">
+        <h2 className="text-4xl font-bold mb-10 text-white">Contactez-nous</h2>
+        <p className="max-w-2xl mx-auto mb-8 text-lg">
+          Une question, une demande spéciale ou simplement envie de nous dire bonjour ?
+          Utilisez le formulaire ci-dessous, nous vous répondrons dans les plus brefs délais !
+        </p>
 
-        {/* Champ pour l'e-mail. */}
-        <div className="mb-4 text-left">
-          <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
-            Email:
-          </label>
-          <input
-            type="email" // Le type "email" active la validation d'e-mail native du navigateur.
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
+        {/* Le formulaire de contact. */}
+        {/* - `aria-label`: Attribut d'accessibilité pour décrire le formulaire aux lecteurs d'écran. */}
+        {/* - `onSubmit`: Appelle la fonction `handleSubmit` lorsque le formulaire est soumis. */}
+        <form onSubmit={handleSubmit} className="max-w-xl mx-auto bg-white/10 p-8 rounded-2xl shadow-lg" aria-label="Formulaire de contact">
+          {/* Champ pour le nom. */}
+          <div className="mb-4 text-left">
+            <label htmlFor="name" className="block text-white text-sm font-bold mb-2">
+              Nom:
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required // Rend le champ obligatoire.
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
 
-        {/* Champ pour le message. */}
-        <div className="mb-6 text-left">
-          <label htmlFor="message" className="block text-gray-700 text-sm font-bold mb-2">
-            Message:
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            rows={5} // Définit la hauteur initiale du textarea.
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          ></textarea>
-        </div>
+          {/* Champ pour l'e-mail. */}
+          <div className="mb-4 text-left">
+            <label htmlFor="email" className="block text-white text-sm font-bold mb-2">
+              Email:
+            </label>
+            <input
+              type="email" // Le type "email" active la validation d'e-mail native du navigateur.
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
 
-        {/* Bouton de soumission du formulaire. */}
-        <button
-          type="submit" // Le type "submit" déclenche la soumission du formulaire.
-          disabled={isSubmitting} // Désactive le bouton pendant la soumission pour éviter les envois multiples.
-          className="bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-accent transition disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isSubmitting ? 'Envoi en cours...' : 'Envoyer le message'} {/* Texte dynamique selon l'état. */}
-        </button>
+          {/* Champ pour le message. */}
+          <div className="mb-6 text-left">
+            <label htmlFor="message" className="block text-white text-sm font-bold mb-2">
+              Message:
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              required
+              rows={5} // Définit la hauteur initiale du textarea.
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            ></textarea>
+          </div>
 
-        {/* Affiche le message de feedback après la soumission. */}
-        {submitMessage && (
-          <p className={`mt-4 ${submitMessage.includes('succès') ? 'text-green-500' : 'text-red-500'}`}>
-            {submitMessage}
-          </p>
-        )}
-      </form>
+          {/* Bouton de soumission du formulaire. */}
+          <button
+            type="submit" // Le type "submit" déclenche la soumission du formulaire.
+            disabled={isSubmitting} // Désactive le bouton pendant la soumission pour éviter les envois multiples.
+            className="bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-accent transition disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? 'Envoi en cours...' : 'Envoyer le message'} {/* Texte dynamique selon l'état. */}
+          </button>
+
+          {/* Affiche le message de feedback après la soumission. */}
+          {submitMessage && (
+            <p className={`mt-4 ${submitMessage.includes('succès') ? 'text-green-300' : 'text-red-300'}`}>
+              {submitMessage}
+            </p>
+          )}
+        </form>
+      </div>
     </section>
   );
 };
