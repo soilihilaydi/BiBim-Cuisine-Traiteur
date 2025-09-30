@@ -12,7 +12,7 @@
  */
 
 // Importe le type 'NextPage' de Next.js, qui est un type générique pour les composants de page.
-import type { NextPage } from 'next';
+import type { Metadata, NextPage } from 'next';
 // Importe les différents composants UI qui composent la page d'accueil.
 // Chaque import correspond à une section spécifique du site.
 import Hero from "../components/Hero";         // Le composant d'en-tête ou de bannière principale.
@@ -21,6 +21,49 @@ import Menu from "../components/Menu";         // La section affichant le menu.
 import Gallery from "../components/Gallery";   // La section de la galerie d'images.
 import Planning from "../components/Planning"; // La section affichant le planning ou les événements.
 import Contact from "../components/Contact";   // La section avec les informations de contact.
+
+/**
+ * @property metadata
+ * @description
+ * Cet objet 'metadata' définit les métadonnées SEO spécifiques à la page d'accueil.
+ * Il surcharge les métadonnées globales définies dans `layout.tsx` pour cette page.
+ *
+ * - `title`: Le titre spécifique de la page d'accueil.
+ * - `description`: Une description détaillée et optimisée pour le SEO de la page d'accueil.
+ * - `alternates.canonical`: L'URL canonique de la page pour éviter le contenu dupliqué.
+ * - `openGraph`: Métadonnées pour le partage sur Facebook, LinkedIn, etc., incluant titre, description, URL, nom du site et image.
+ * - `twitter`: Métadonnées pour les Twitter Cards, incluant le type de carte, titre, description et image.
+ */
+export const metadata: Metadata = {
+  title: "Accueil",
+  description: "BiBim-Cuisine, votre traiteur coréen et food truck. Découvrez notre cuisine authentique, nos plats faits maison et trouvez-nous près de chez vous.",
+  alternates: {
+    canonical: "https://bi-bim-cuisine-traiteur.vercel.app",
+  },
+  openGraph: {
+    title: "BiBim-Cuisine Traiteur - Food Truck et Traiteur Coréen",
+    description: "Découvrez notre cuisine coréenne authentique, nos plats faits maison et réservez-nous pour vos événements.",
+    url: "https://bi-bim-cuisine-traiteur.vercel.app",
+    siteName: "BiBim-Cuisine Traiteur",
+    images: [
+      {
+        url: "https://bi-bim-cuisine-traiteur.vercel.app/images/hero.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Bannière de BiBim-Cuisine Traiteur",
+      },
+    ],
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BiBim-Cuisine Traiteur - Food Truck et Traiteur Coréen",
+    description: "Découvrez notre cuisine coréenne authentique, nos plats faits maison et réservez-nous pour vos événements.",
+    images: ["https://bi-bim-cuisine-traiteur.vercel.app/images/hero.jpg"],
+  },
+};
+
 
 /**
  * @function Home

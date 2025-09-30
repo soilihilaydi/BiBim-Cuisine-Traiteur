@@ -15,7 +15,7 @@ Ce projet est un site web pour un "resto-ambulant", conçu pour présenter le co
 Ce projet utilise des variables d'environnement pour gérer les informations sensibles ou spécifiques à l'environnement (développement, production). Elles sont nécessaires pour le bon fonctionnement de l'application en local et pour le déploiement via GitHub Actions/Vercel.
 
 Pour le développement local, créez un fichier `.env.local` à la racine du projet et ajoutez-y les variables.
-Pour le déploiement CI/CD via GitHub Actions, configurez ces variables comme des [Secrets GitHub](https://docs.github.com/fr/actions/security-guides/encrypted-secrets).
+Pour le déploiement CI/CD via GitHub Actions ou directement sur Vercel, configurez ces variables comme des [Secrets GitHub](https://docs.github.com/fr/actions/security-guides/encrypted-secrets) ou directement dans les paramètres de votre projet Vercel.
 
 Voici la liste des variables requises :
 
@@ -29,15 +29,30 @@ Voici la liste des variables requises :
 *   `VERCEL_ORG_ID` : L'ID de votre organisation Vercel.
 *   `VERCEL_PROJECT_ID` : L'ID de votre projet Vercel.
 
-### Variables Nodemailer (pour l'envoi d'e-mails via l'API de contact)
-*   `EMAIL_HOST` : L'hôte de votre serveur SMTP (ex: `smtp.gmail.com`).
-*   `EMAIL_PORT` : Le port de votre serveur SMTP (ex: `587`).
-*   `EMAIL_SECURE` : `true` ou `false` selon si la connexion SMTP est sécurisée.
-*   `EMAIL_USER` : Votre nom d'utilisateur SMTP.
-*   `EMAIL_PASS` : Votre mot de passe SMTP.
+### Variables pour le Système d'E-mails (via Nodemailer et l'API de contact)
+Ces variables sont utilisées par l'API `/api/contact` pour envoyer des e-mails via un serveur SMTP.
+*   `EMAIL_HOST` : L'hôte de votre serveur SMTP (ex: `smtp.gmail.com` pour Gmail).
+*   `EMAIL_PORT` : Le port de votre serveur SMTP (ex: `465` ou `587` pour Gmail). Utilisez `465` avec `EMAIL_SECURE=true`.
+*   `EMAIL_SECURE` : `true` ou `false` selon si la connexion SMTP est sécurisée (généralement `true` pour Gmail).
+*   `EMAIL_USER` : Votre adresse e-mail complète (ex: `votre.email@gmail.com`).
+*   `EMAIL_PASS` : **Très important pour Gmail :** Il doit s'agir d'un **mot de passe d'application** généré depuis les paramètres de sécurité de votre compte Google, et non de votre mot de passe principal. La validation en deux étapes doit être activée pour générer un mot de passe d'application. Pour générer un mot de passe d'application : [https://myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)
+
+**Configuration sur Vercel :** Pour les déploiements en production sur Vercel, ces variables doivent être configurées directement dans les "Environment Variables" des paramètres de votre projet Vercel, et non dans le fichier `.env.local`.
 
 ### Variables Sentry (pour le suivi des erreurs en production)
 *   `SENTRY_DSN` : Votre DSN (Data Source Name) Sentry.
+
+## Optimisations SEO (Search Engine Optimization)
+
+Le projet a été configuré avec des bases solides pour le SEO afin d'améliorer sa visibilité sur les moteurs de recherche et son partage sur les réseaux sociaux.
+
+### Métadonnées (Next.js App Router)
+*   **`src/app/layout.tsx`** : Contient les métadonnées globales par défaut (titre, description, langue `fr`) et un modèle de titre (`%s | BiBim-Cuisine Traiteur`) pour une cohérence sur tout le site.
+*   **`src/app/page.tsx`** : Définit les métadonnées spécifiques à la page d'accueil, incluant un titre et une description uniques, une URL canonique, ainsi que les balises Open Graph et Twitter Cards pour un affichage optimisé lors du partage de liens.
+
+### Fichiers pour les Robots
+*   **`public/robots.txt`** : Indique aux robots des moteurs de recherche les pages qu'ils peuvent explorer et pointe explicitement vers le `sitemap.xml`.
+*   **`public/sitemap.xml`** : Liste les URL importantes du site (actuellement la page d'accueil) pour aider les moteurs de recherche à indexer le contenu. L'URL et la date de dernière modification sont à jour.
 
 ## Getting Started
 
