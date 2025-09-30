@@ -10,6 +10,8 @@
  * - L'application de classes Tailwind CSS pour le stylisme du texte et de l'arrière-plan.
  */
 
+import Image from 'next/image';
+
 // Définition du composant fonctionnel Concept.
 const Concept = () => {
   return (
@@ -18,22 +20,26 @@ const Concept = () => {
     // - `py-20 px-6`: Ajoute un padding vertical (haut/bas) de 80px et horizontal (gauche/droite) de 24px.
     // - `text-center`: Centre le texte à l'intérieur de la section.
     // - `bg-accent`: Définit la couleur de fond de la section en utilisant la couleur 'accent' définie dans Tailwind.
-    <section id="concept" className="py-20 px-6 text-center bg-accent">
-      {/* Titre de la section. */}
-      {/* - `text-4xl font-bold mb-6`: Taille du texte, gras, et marge inférieure. */}
-      {/* - `text-primary`: Définit la couleur du texte en utilisant la couleur 'primary' définie dans Tailwind. */}
-      <h2 className="text-4xl font-bold mb-6 text-primary">Notre Concept</h2>
+    <section id="concept" className="py-20 px-6 flex flex-col lg:flex-row items-center justify-center bg-accent/50">
+      {/* Left Image */}
+      <div className="hidden lg:block w-1/4">
+        <Image src="/foodtruck.png" alt="Food Truck" width={200} height={200} className="mx-auto" />
+      </div>
 
-      {/* Paragraphe décrivant le concept. */}
-      {/* - `max-w-2xl`: Limite la largeur maximale du paragraphe pour une meilleure lisibilité. */}
-      {/* - `mx-auto`: Centre le paragraphe horizontalement en lui donnant des marges automatiques. */}
-      {/* - `text-lg`: Définit la taille du texte. */}
-      <p className="max-w-2xl mx-auto text-lg text-red-500">
-        Sur le marché de Lamastre les mardis / réalisation de repas pour groupes, buffets froids/chauds/apéro.
-        {/* La balise <br/> force un retour à la ligne. */}
-        <br/>
-        Une restauration nomade qui se déplace pour venir à vous : convivialité, authenticité et gourmandise. 🌮🍲
-      </p>
+      {/* Text Content */}
+      <div className="text-center lg:w-1/2">
+        <h2 className="text-4xl font-bold mb-6 text-white">Notre Concept</h2>
+        <p className="max-w-2xl mx-auto text-lg text-white">
+          Sur le marché de Lamastre les mardis / réalisation de repas pour groupes, buffets froids/chauds/apéro.
+          <br/>
+          Une restauration nomade qui se déplace pour venir à vous : convivialité, authenticité et gourmandise. 🌮🍲
+        </p>
+      </div>
+
+      {/* Right Image */}
+      <div className="hidden lg:block w-1/4">
+        <Image src="/foodtruck.png" alt="Food Truck" width={200} height={200} className="mx-auto" />
+      </div>
     </section>
   );
 };
