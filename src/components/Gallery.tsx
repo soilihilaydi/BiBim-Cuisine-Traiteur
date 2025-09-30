@@ -93,8 +93,7 @@ const Gallery = ({ initialGalleryItems }: GalleryProps) => {
           }
         }
       }`;
-      const data = await sanityClient.fetch(query);
-      console.log('Sanity data:', data); // Exécute la requête via le client Sanity.
+      const data = await sanityClient.fetch(query); // Exécute la requête via le client Sanity.
       setGalleryItems(data); // Met à jour l'état `galleryItems` avec les données reçues.
     } catch (err) {
       console.error("Error fetching gallery items:", err); // Log l'erreur en console.

@@ -249,7 +249,7 @@ const Planning = ({ initialPlanningItems }: PlanningProps) => {
     // - `id="planning"`: Ancre pour la navigation.
     <section id="planning" className="py-20 px-6 text-center">
       {/* Affiche le script JSON-LD généré pour le SEO. */}
-      {generateEventSchema()}
+      {/* {generateEventSchema()} */}
       <h2 className="text-4xl font-bold mb-10 text-primary">Où nous trouver</h2>
       <p className="mb-6">Retrouvez notre foodtruck selon le planning ci-dessous :</p>
       <ul className="max-w-xl mx-auto mb-8 text-lg">

@@ -26,7 +26,7 @@ const Hero = () => {
       className="h-screen flex flex-col justify-center items-center text-white text-center px-4 bg-cover bg-fixed bg-center"
       // Style inline pour définir l'image de fond.
       // L'image 'foodtruck.jpg' est un placeholder.
-      style={{ backgroundImage: 'url(/foodtruck.jpg)' }} // Placeholder image
+      style={{ backgroundImage: 'url(/images/hero.jpg)' }} // Image de fond personnalisée
     >
       {/* Calque de superposition (overlay) pour améliorer la lisibilité du texte sur l'image de fond. */}
       {/* - `absolute inset-0`: Positionne le div absolument pour couvrir toute la section. */}
